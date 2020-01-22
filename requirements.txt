@@ -1,0 +1,6 @@
+slackclient>=2.5.0
+subword_nmt
+certifi
+slack
+sacremoses
+git+git://github.com/joeynmt/joeynmt
