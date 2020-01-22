@@ -8,7 +8,6 @@ Disclaimer: Not made for long-term or production-ready deployment, since we're n
 ## Requirements
 - You need a trained Joey NMT model. See [here](https://github.com/joeynmt/joeynmt#training) for instructions on how to train one, or use one of the [pretrained models](https://github.com/joeynmt/joeynmt#pre-trained-models).
 - In order to provide translations, Joey NMT needs to be running on a *machine*. GPUs are faster, but the reponse time of a model running on CPU should still be bearable (imagine a human typing - it's still faster than that ;)). You can only query translations as long as the job on the machine is running, so best would be a server. For short-time demos, your local machine should be fine, too.
-- You need the *right* to add a bot to the slack workspace you're interested in. Talk to the admin!
 - This code runs on Python3.6.
 - We're using [`ngrok`](https://ngrok.com/) to expose a locally deployed model to the outside.
 
@@ -26,14 +25,14 @@ This includes Joey NMT (for CPU - install it manually for GPU, see next section)
 
 ### 1. Create an app
 - Create or choose a channel in your slack team to integrate your bot. This is where the bot reacts to every incoming message by anyone. Let's call this channel `BOT_CHANNEL`. Write it's name in `bot.channel`. 
-- Register a bot in your slack team's app integrations [here](https://WORKSPACE.slack.com/apps/manage/custom-integrations) (or as an bot [app](https://api.slack.com/start/overview). See this [tutorial](https://github.com/slackapi/python-slackclient/blob/master/tutorial/01-creating-the-slack-app.md).
+- Create an app for your workspace. See this [tutorial](https://github.com/slackapi/python-slackclient/blob/master/tutorial/01-creating-the-slack-app.md).
     - Write the app's name (`BOT_NAME`) into `bot.name`. 
     - Define bot token scopes: `app_mentions:read`, `chat:write`, `incoming-webhook`, `channels:read` are needed. You need to re-install the app anytime you change the permissions.
     - Authorize the app for the workspace and assign it the new channel.
     - If this is successful, you'll receive a bot token. It should start with `xoxb`.
     - Write the bok token into `bot.token`.
     - Add the bot to the channel in the slack workspace.
-    - Store the sign-in token in `bot.signin`.
+    - Store the sign-in secret in `bot.signin`.
 - We're going to use the [Event API](https://api.slack.com/events-api) to make the bot subscribe to events in slack. (The RTM API is no longer available for new apps.)
     
 ### 2. Subscribe to events
