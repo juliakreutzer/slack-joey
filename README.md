@@ -43,9 +43,10 @@ This includes Joey NMT (for CPU - install it manually for GPU, see next section)
 - For the Request URL, use the ngrok URL with a suffix: `http://somerandomsymbols.ngrok.io/slack/events`.
 - Run `python3.6 main.py my_model_dir` to start the app. 
 - After verification, subscribe to bot events: `app_mention`, `message.channels`, `message.im`.
-- Click `Save changes` to save the changes for your app. 
+- Click `Save changes` to save the changes for your app.
 
 ### 3. Running 
+- Run `python3.6 main.py my_model_dir` to start the app. Optionally specify `--bpe_src_code my_model_dir/src.bpe` if you're using a BPE-based model, and `--tokenize` if the training data was tokenized too.
 - In slack, move to the `BOT_CHANNEL` and write a message. Your bot should automatically reply. 
 - In addition to that, the bot reacts on mentions, so addressing `@BOT_NAME` will make it respond.
 
@@ -54,9 +55,9 @@ This includes Joey NMT (for CPU - install it manually for GPU, see next section)
     - `use_cuda`: set to False if running on CPU, True when on GPU.
     - `max_output_length`: sets the maximum output length
     - `beam_size`: beam size for decoding, 1 is greedy decoding.
-- We assume the data is pre-processed with the MosesTokenizer if you set `tokenize`. If you want to use a different one, modify the code accordingly. 
+- We assume the data is pre-processed with the MosesTokenizer if you set `--tokenize`. If you want to use a different one, modify the code accordingly. 
 
 ### Interactions
 See the docu on how to create bots for slack workspaces and explore the links there: https://slack.com/help/articles/115005265703-Create-a-bot-for-your-workspace
-You could add more interaction modes, language id to activate different bots, etc. - please make a PR to this repo if you implement a cool extension :) Rhis is really just the bare bone.
+You could add more interaction modes, language id to activate different bots, etc. - please make a PR to this repo if you implement a cool extension :) This is really just the bare bone.
 
